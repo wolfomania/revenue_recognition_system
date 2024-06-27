@@ -1,4 +1,4 @@
-namespace RevenueRecognitionSystem;
+namespace RevenueRecognitionSystem.Models.AuthRequests;
 
 public class RefreshTokenRequest
 {

@@ -1,5 +1,8 @@
+using System.Runtime.InteropServices.JavaScript;
 using Microsoft.EntityFrameworkCore;
-using RevenueRecognitionSystem.Domain;
+using RevenueRecognitionSystem.Data;
+using RevenueRecognitionSystem.Models.ClientRequest;
+using RevenueRecognitionSystem.Models.Domain;
 
 namespace RevenueRecognitionSystem.Services;
 

@@ -1,21 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace RevenueRecognitionSystem.Domain;
+namespace RevenueRecognitionSystem.Models.Domain;
 
 public class Discount
 {
     [Key]
     public int DiscountId { get; set; }
-    [Required]
     public string Name { get; set; }
-    [Required]
-    public string OfferType { get; set; }
-    [Required]
-    public float Value { get; set; }
-    [Required]
-    public DateTime StartDate { get; set; }
-    [Required]
-    public DateTime EndDate { get; set; }
+    public string? OfferType { get; set; }
+    [Range(0, 100)]
+    public double Value { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? EndDate { get; set; }
     
     public ICollection<SoftwareDiscount> SoftwareDiscounts { get; set; }
 }

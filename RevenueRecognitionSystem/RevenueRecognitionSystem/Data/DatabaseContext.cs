@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using RevenueRecognitionSystem.Domain;
 using RevenueRecognitionSystem.Helpers;
+using RevenueRecognitionSystem.Models.Domain;
 
-namespace RevenueRecognitionSystem;
+namespace RevenueRecognitionSystem.Data;
 
 public class DatabaseContext : DbContext
 {
@@ -51,6 +51,14 @@ public class DatabaseContext : DbContext
             Role = "Admin",
             RefreshToken = SecurityHelpers.GenerateRefreshToken(),
             RefreshTokenExp = DateTime.Now.AddDays(1)
+        });
+        
+        modelBuilder.Entity<Discount>().HasData(new Discount
+        {
+            DiscountId = 1,
+            Name = "Previous Customer",
+            OfferType = " Discount for previous customers 5%",
+            Value = 5,
         });
     }
     

@@ -1,19 +1,22 @@
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Contracts;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Contract = RevenueRecognitionSystem.Models.Domain.Contract;
 
-namespace RevenueRecognitionSystem.Domain;
+namespace RevenueRecognitionSystem.Models.Domain;
 
 public class Software
 {
     [Key]
     public int SoftwareId { get; set; }
-    [Required]
+    [MaxLength(100)]
     public string Name { get; set; }
+    [MaxLength(200)]
     public string Description { get; set; }
+    [MaxLength(20)]
     public string CurrentVersion { get; set; }
-    [Required]
+    [MaxLength(100)]
     public string Category { get; set; }
+    [Range(0, double.MaxValue)]
+    public double Price { get; set; }
 
     public ICollection<Contract> Contracts { get; set; }
     public ICollection<Subscription> Subscriptions { get; set; }

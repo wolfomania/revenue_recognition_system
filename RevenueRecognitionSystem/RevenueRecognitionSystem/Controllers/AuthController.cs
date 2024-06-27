@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using RevenueRecognitionSystem.Domain;
 using RevenueRecognitionSystem.Helpers;
+using RevenueRecognitionSystem.Models.AuthRequests;
+using RevenueRecognitionSystem.Models.Domain;
 using RevenueRecognitionSystem.Services;
+using LoginRequest = RevenueRecognitionSystem.Models.AuthRequests.LoginRequest;
+using RegisterRequest = RevenueRecognitionSystem.Models.AuthRequests.RegisterRequest;
 
 namespace RevenueRecognitionSystem.Controllers
 {
@@ -33,7 +36,7 @@ namespace RevenueRecognitionSystem.Controllers
                 Login = model.Login,
                 Password = hashedPasswordAndSalt.Item1,
                 Salt = hashedPasswordAndSalt.Item2,
-                Role = "employee",
+                Role = "Employee",
                 RefreshToken = SecurityHelpers.GenerateRefreshToken(),
                 RefreshTokenExp = DateTime.Now.AddDays(1)
             };

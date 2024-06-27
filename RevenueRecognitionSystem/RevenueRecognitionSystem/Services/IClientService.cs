@@ -1,4 +1,5 @@
-using RevenueRecognitionSystem.Domain;
+using RevenueRecognitionSystem.Models.ClientRequest;
+using RevenueRecognitionSystem.Models.Domain;
 
 namespace RevenueRecognitionSystem.Services;
 

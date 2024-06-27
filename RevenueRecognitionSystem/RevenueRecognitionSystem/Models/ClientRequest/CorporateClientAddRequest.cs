@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace RevenueRecognitionSystem;
+namespace RevenueRecognitionSystem.Models.ClientRequest;
 
 public class CorporateClientAddRequest
 {

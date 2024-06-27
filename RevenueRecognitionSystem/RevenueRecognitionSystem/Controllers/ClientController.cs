@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RevenueRecognitionSystem.Domain;
+using RevenueRecognitionSystem.Models.ClientRequest;
+using RevenueRecognitionSystem.Models.Domain;
 using RevenueRecognitionSystem.Services;
 
 namespace RevenueRecognitionSystem.Controllers
@@ -29,7 +30,9 @@ namespace RevenueRecognitionSystem.Controllers
                     address = client.Address,
                     email = client.Email,
                     phoneNumber = client.PhoneNumber,
-                    client.PESEL
+                    client.PESEL,
+                    client.Contracts,
+                    client.Subscriptions
                 });
             }
 
@@ -39,7 +42,9 @@ namespace RevenueRecognitionSystem.Controllers
                 address = client.Address,
                 email = client.Email,
                 phoneNumber = client.PhoneNumber,
-                client.KRS
+                client.KRS,
+                client.Contracts,
+                client.Subscriptions
             });
         }
         
@@ -61,7 +66,7 @@ namespace RevenueRecognitionSystem.Controllers
 
             await clientService.AddClient(client);
 
-            return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, client);
+            return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, await GetClient(client.ClientId));
         }
         
         [Authorize]
@@ -96,7 +101,7 @@ namespace RevenueRecognitionSystem.Controllers
 
             await clientService.AddClient(client);
 
-            return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, client);
+            return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, await GetClient(client.ClientId));
         }
         
         [Authorize]

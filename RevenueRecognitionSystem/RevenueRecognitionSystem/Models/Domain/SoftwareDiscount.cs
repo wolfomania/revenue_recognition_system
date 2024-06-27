@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace RevenueRecognitionSystem.Domain;
+namespace RevenueRecognitionSystem.Models.Domain;
 
 [PrimaryKey(nameof(SoftwareId), nameof(DiscountId))]
 public class SoftwareDiscount

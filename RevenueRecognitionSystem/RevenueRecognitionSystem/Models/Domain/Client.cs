@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Contracts;
 
-namespace RevenueRecognitionSystem.Domain;
+namespace RevenueRecognitionSystem.Models.Domain;
 
 public class Client
 {

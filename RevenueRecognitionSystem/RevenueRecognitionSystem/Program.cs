@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RevenueRecognitionSystem;
+using RevenueRecognitionSystem.Data;
 using RevenueRecognitionSystem.Helpers;
 using RevenueRecognitionSystem.Middlewares;
 using RevenueRecognitionSystem.Services;
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IContractService, ContractService>();
 
 builder.Services.AddAuthentication(options =>
 {
