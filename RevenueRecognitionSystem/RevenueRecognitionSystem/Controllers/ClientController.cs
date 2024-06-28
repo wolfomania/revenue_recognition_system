@@ -70,7 +70,7 @@ namespace RevenueRecognitionSystem.Controllers
             return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, await GetClient(client.ClientId));
         }
         
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut("individual/{id:int}")]
         public async Task<IActionResult> UpdateIndividualClient(int id, [FromBody] UpdateIndividualClientRequest request)
         {
@@ -108,7 +108,7 @@ namespace RevenueRecognitionSystem.Controllers
             return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, await GetClient(client.ClientId));
         }
         
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPut("corporate/{id:int}")]
         public async Task<IActionResult> UpdateCorporateClient(int id, [FromBody] UpdateCorporateClientRequest request)
         {
