@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 
 namespace RevenueRecognitionSystem.Services;
 
-public class CurrencyService(HttpClient httpClient) : BackgroundService
+public class CurrencyService(HttpClient httpClient) : BackgroundService, ICurrencyService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

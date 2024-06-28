@@ -24,6 +24,7 @@ builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IContractService, ContractService>();
 builder.Services.AddScoped<IRevenueService, RevenueService>();
+builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddHttpClient<CurrencyService>();
 builder.Services.AddHostedService<CurrencyService>();
 

@@ -3,10 +3,8 @@ using RevenueRecognitionSystem.Data;
 
 namespace RevenueRecognitionSystem.Services;
 
-public class RevenueService(DatabaseContext context, CurrencyService currencyService) : IRevenueService
+public class RevenueService(DatabaseContext context, ICurrencyService currencyService) : IRevenueService
 {
-    private readonly CurrencyService _currencyService = currencyService;
-
     public async Task<double> CalculateSoftwareRevenue(int softwareId, string? targetCurrency)
     {
         var revenue = await context.Contracts
@@ -17,7 +15,7 @@ public class RevenueService(DatabaseContext context, CurrencyService currencySer
 
         if (string.IsNullOrEmpty(targetCurrency)) return revenue;
         
-        var exchangeRate = await _currencyService.GetExchangeRate(targetCurrency);
+        var exchangeRate = await currencyService.GetExchangeRate(targetCurrency);
         revenue /= exchangeRate;
 
         return revenue;
@@ -32,7 +30,7 @@ public class RevenueService(DatabaseContext context, CurrencyService currencySer
         
         if (string.IsNullOrEmpty(targetCurrency)) return revenue;
         
-        var exchangeRate = await _currencyService.GetExchangeRate(targetCurrency);
+        var exchangeRate = await currencyService.GetExchangeRate(targetCurrency);
         revenue /= exchangeRate;
 
         return revenue;
@@ -47,7 +45,7 @@ public class RevenueService(DatabaseContext context, CurrencyService currencySer
         
         if (string.IsNullOrEmpty(targetCurrency)) return revenue;
         
-        var exchangeRate = await _currencyService.GetExchangeRate(targetCurrency);
+        var exchangeRate = await currencyService.GetExchangeRate(targetCurrency);
         revenue /= exchangeRate;
 
         return revenue;
@@ -61,7 +59,7 @@ public class RevenueService(DatabaseContext context, CurrencyService currencySer
         
         if (string.IsNullOrEmpty(targetCurrency)) return revenue;
         
-        var exchangeRate = await _currencyService.GetExchangeRate(targetCurrency);
+        var exchangeRate = await currencyService.GetExchangeRate(targetCurrency);
         revenue /= exchangeRate;
 
         return revenue;
