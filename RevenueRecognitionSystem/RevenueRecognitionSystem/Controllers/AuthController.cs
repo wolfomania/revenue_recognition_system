@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
@@ -17,7 +18,7 @@ namespace RevenueRecognitionSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IConfiguration configuration, AuthService authService) : ControllerBase
+    public class AuthController(IConfiguration configuration, IAuthService authService) : ControllerBase
     {
         [AllowAnonymous]
         [HttpPost("register")]
@@ -42,7 +43,7 @@ namespace RevenueRecognitionSystem.Controllers
             };
 
             await authService.AddEmployee(newEmployee);
-
+            
             return Ok();
         }
         
@@ -64,8 +65,7 @@ namespace RevenueRecognitionSystem.Controllers
             {
                 return Unauthorized();
             }
-
-
+            
             var employeeClaims = new[]
             {
                 new Claim(ClaimTypes.Role, employee.Role)
@@ -84,7 +84,7 @@ namespace RevenueRecognitionSystem.Controllers
             );
 
             await authService.UpdateEmployeeRefreshToken(employee, DateTime.Now.AddDays(1));
-
+            
             return Ok(new
             {
                 accessToken = new JwtSecurityTokenHandler().WriteToken(token),
@@ -111,7 +111,7 @@ namespace RevenueRecognitionSystem.Controllers
             {
                 new Claim(ClaimTypes.Role, employee.Role)
             };
-
+            
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
 
             SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -125,7 +125,7 @@ namespace RevenueRecognitionSystem.Controllers
             );
             
             await authService.UpdateEmployeeRefreshToken(employee, DateTime.Now.AddDays(1));
-
+            
             return Ok(new
             {
                 accessToken = new JwtSecurityTokenHandler().WriteToken(jwtToken),

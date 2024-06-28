@@ -5,7 +5,7 @@ using RevenueRecognitionSystem.Models.Domain;
 
 namespace RevenueRecognitionSystem.Services;
 
-public class AuthService
+public class AuthService : IAuthService
 {
     private readonly DatabaseContext _context;
 
@@ -24,11 +24,6 @@ public class AuthService
     public async Task AddEmployee(Employee employee)
     {
         _context.Employees.Add(employee);
-        await _context.SaveChangesAsync();
-    }
-    
-    public async Task SaveChanges()
-    {
         await _context.SaveChangesAsync();
     }
 

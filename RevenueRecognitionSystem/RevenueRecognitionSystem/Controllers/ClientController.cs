@@ -1,3 +1,4 @@
+using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +53,7 @@ namespace RevenueRecognitionSystem.Controllers
         [HttpPost("individual")]
         public async Task<IActionResult> AddIndividualClient([FromBody] IndividualClientAddRequest addRequest)
         {
-            
+
             var client = new Client
             {
                 FirstName = addRequest.FirstName,
@@ -65,7 +66,7 @@ namespace RevenueRecognitionSystem.Controllers
             };
 
             await clientService.AddClient(client);
-
+            
             return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, await GetClient(client.ClientId));
         }
         
@@ -98,9 +99,12 @@ namespace RevenueRecognitionSystem.Controllers
                 KRS = addRequest.KRS,
                 IsDeleted = false
             };
+            using var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await clientService.AddClient(client);
 
+            transaction.Complete();
+            
             return CreatedAtAction(nameof(GetClient), new { id = client.ClientId }, await GetClient(client.ClientId));
         }
         
@@ -113,9 +117,9 @@ namespace RevenueRecognitionSystem.Controllers
             {
                 return NotFound();
             }
-            
-            await clientService.UpdateCorporateClient(client, request);
 
+            await clientService.UpdateCorporateClient(client, request);
+            
             return NoContent();
         }
         
@@ -131,7 +135,7 @@ namespace RevenueRecognitionSystem.Controllers
             }
 
             await clientService.DeleteClient(client);
-
+            
             return NoContent();
         }
     }

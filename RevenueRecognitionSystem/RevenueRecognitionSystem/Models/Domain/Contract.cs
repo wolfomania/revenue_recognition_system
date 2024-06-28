@@ -17,6 +17,7 @@ public class Contract
     public DateTime EndDate { get; set; }
     public double Price { get; set; }
     public bool IsSigned { get; set; }
+    [MaxLength(50)]
     public string Version { get; set; }
     public int AdditionalSupportYears { get; set; }
     public double FinalPrice { get; set; }

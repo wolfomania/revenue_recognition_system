@@ -10,4 +10,6 @@ public interface IContractService
     Task<Discount?> GetDiscountForSoftware(int softwareSoftwareId);
     Task<Contract?> GetContractById(int id);
     Task AddContract(Contract contract);
+    Task DeleteContract(Contract contract);
+    Task AddPayment(Payment payment);
 }

@@ -58,4 +58,27 @@ public class ContractService : IContractService
             .Select(sd => sd.Discount)
             .FirstOrDefaultAsync();
     }
+
+    public async Task DeleteContract(Contract contract)
+    {
+        _context.Contracts.Remove(contract);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task AddPayment(Payment payment)
+    {
+        _context.Payments.Add(payment);
+        var total = await _context.Payments
+            .Where(p => p.ContractId == payment.ContractId)
+            .SumAsync(p => p.Amount);
+        
+        var contract = await _context.Contracts.FindAsync(payment.ContractId);
+        
+        if (total >= contract.FinalPrice)
+        {
+            contract.IsSigned = true;
+        }
+        
+        await _context.SaveChangesAsync();
+    }
 }

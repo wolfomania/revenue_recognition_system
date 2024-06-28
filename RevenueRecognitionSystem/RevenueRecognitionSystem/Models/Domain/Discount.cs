@@ -6,7 +6,9 @@ public class Discount
 {
     [Key]
     public int DiscountId { get; set; }
+    [MaxLength(100)]
     public string Name { get; set; }
+    [MaxLength(200)]
     public string? OfferType { get; set; }
     [Range(0, 100)]
     public double Value { get; set; }

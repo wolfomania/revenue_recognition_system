@@ -4,19 +4,18 @@ namespace RevenueRecognitionSystem.Models.ClientRequest;
 
 public class IndividualClientAddRequest
 {
-    [Required]
+    [MaxLength(50)]
     public string FirstName { get; set; }
-    [Required]
+    [MaxLength(100)]
     public string LastName { get; set; }
-    [Required]
+    [MaxLength(200)]
     public string Address { get; set; }
     [EmailAddress]
-    [Required]
+    [MaxLength(200)]
     public string Email { get; set; }
     [Phone]
-    [Required]
+    [MaxLength(20)]
     public string PhoneNumber { get; set; }
-    [Required]
     [Length(maximumLength:11, minimumLength:11, ErrorMessage = "PESEL must be 11 characters long")]
     public string PESEL { get; set; }
 

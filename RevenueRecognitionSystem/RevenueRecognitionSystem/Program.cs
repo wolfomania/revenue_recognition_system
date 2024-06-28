@@ -21,8 +21,11 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQL"));
 });
 builder.Services.AddScoped<IClientService, ClientService>();
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IContractService, ContractService>();
+builder.Services.AddScoped<IRevenueService, RevenueService>();
+builder.Services.AddHttpClient<CurrencyService>();
+builder.Services.AddHostedService<CurrencyService>();
 
 builder.Services.AddAuthentication(options =>
 {

@@ -4,16 +4,16 @@ namespace RevenueRecognitionSystem.Models.ClientRequest;
 
 public class CorporateClientAddRequest
 {
-    [Required]
+    [MaxLength(150)]
     public string CompanyName { get; set; }
-    [Required]
+    [MaxLength(200)]
     public string Address { get; set; }
     [EmailAddress]
-    [Required]
+    [MaxLength(200)]
     public string Email { get; set; }
     [Phone]
-    [Required]
+    [MaxLength(20)]
     public string PhoneNumber { get; set; }
-    [Required]
+    [MaxLength(200)]
     public string KRS { get; set; }
 }
